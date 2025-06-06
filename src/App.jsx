@@ -21,13 +21,14 @@ const Sticker = ({ src, x, y, onDelete, onDragEnd }) => {
 const App = () => {
   const stageRef = useRef();
   const [stickers, setStickers] = useState([]);
-  const stickerSources = ["/src/assets/sticker1.jpg", "/src/assets/sticker2.jpg", "/src/assets/sticker3.jpg"];
+  const stickerSources = [
+    "../public/assets/sticker1.jpg",
+    "../public/assets/sticker2.jpg",
+    "../public/assets/sticker3.jpg",
+  ];
 
   const addSticker = (src) => {
-    setStickers([
-      ...stickers,
-      { id: Date.now(), src, x: 60, y: 60 }
-    ]);
+    setStickers([...stickers, { id: Date.now(), src, x: 60, y: 60 }]);
   };
 
   const snapToGrid = (pos) => ({
@@ -37,9 +38,9 @@ const App = () => {
 
   const handleDragEnd = (id, e) => {
     const pos = snapToGrid(e.target.position());
-    setStickers(stickers.map(s =>
-      s.id === id ? { ...s, x: pos.x, y: pos.y } : s
-    ));
+    setStickers(
+      stickers.map((s) => (s.id === id ? { ...s, x: pos.x, y: pos.y } : s))
+    );
   };
 
   const handleDelete = (id) => {
@@ -68,30 +69,29 @@ const App = () => {
             onClick={() => addSticker(src)}
           />
         ))}
-      
       </div>
 
       {/* Canvas */}
       <div>
-      <Stage
-        width={600}
-        height={400}
-        ref={stageRef}
-        className="bg-white border-2 border-gray-400 rounded"
-      >
-        <Layer>
-          {stickers.map((s) => (
-            <Sticker
-              key={s.id}
-              src={s.src}
-              x={s.x}
-              y={s.y}
-              onDelete={() => handleDelete(s.id)}
-              onDragEnd={(e) => handleDragEnd(s.id, e)}
-            />
-          ))}
-        </Layer>
-      </Stage>
+        <Stage
+          width={600}
+          height={400}
+          ref={stageRef}
+          className="bg-white border-2 border-gray-400 rounded"
+        >
+          <Layer>
+            {stickers.map((s) => (
+              <Sticker
+                key={s.id}
+                src={s.src}
+                x={s.x}
+                y={s.y}
+                onDelete={() => handleDelete(s.id)}
+                onDragEnd={(e) => handleDragEnd(s.id, e)}
+              />
+            ))}
+          </Layer>
+        </Stage>
         <button
           onClick={handleDownload}
           className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition cursor-pointer"
