@@ -1,4 +1,3 @@
-
 ## 📦 Features
 
 - 600×400 canvas using Konva
@@ -11,4 +10,5 @@
 
 ```bash
 npm install
-npm start
+npm run dev
+```
