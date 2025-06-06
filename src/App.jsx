@@ -1,6 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Stage, Layer, Image as KonvaImage } from "react-konva";
 import useImage from "use-image";
+import sticker1 from "./assets/sticker1.jpg";
+import sticker2 from "./assets/sticker2.jpg";
+import sticker3 from "./assets/sticker3.jpg";
 
 const Sticker = ({ src, x, y, onDelete, onDragEnd }) => {
   const [image] = useImage(src);
@@ -21,11 +24,7 @@ const Sticker = ({ src, x, y, onDelete, onDragEnd }) => {
 const App = () => {
   const stageRef = useRef();
   const [stickers, setStickers] = useState([]);
-  const stickerSources = [
-    "../public/assets/sticker1.jpg",
-    "../public/assets/sticker2.jpg",
-    "../public/assets/sticker3.jpg",
-  ];
+  const stickerSources = [sticker1, sticker2, sticker3];
 
   const addSticker = (src) => {
     setStickers([...stickers, { id: Date.now(), src, x: 60, y: 60 }]);
